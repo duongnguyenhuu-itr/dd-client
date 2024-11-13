@@ -1,5 +1,7 @@
 "use client";
 
+import { AvatarCustom } from '@/components/custom/avatarCustom';
+import { Button } from '@/components/ui/button';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_PRODUCTS = gql`
@@ -27,6 +29,13 @@ export default function Home() {
   return (
     <div>
       <h1>Products 2</h1>
+      <div>
+        <Button>Click me</Button>
+        <AvatarCustom
+          photo="https://github.com/shadcn.png"
+          name="Shadcn"
+        />
+      </div>
       <ul>
         {data?.products.map((product) => (
           <li key={product.id}>
