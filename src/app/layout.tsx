@@ -1,8 +1,11 @@
+import { ApolloWrapper } from "@/lib/apolloWrapper";
+import {
+  ClerkProvider
+} from '@clerk/nextjs';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import React from "react";
-import { ApolloWrapper } from "@/lib/apolloWrapper";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,12 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ApolloWrapper>{children}</ApolloWrapper>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ApolloWrapper>
+            {children}
+          </ApolloWrapper>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

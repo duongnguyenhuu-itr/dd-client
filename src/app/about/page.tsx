@@ -9,9 +9,9 @@ export default function About() {
     createProduct({
       variables: {
         input: {
-          name: "New Product",
+          name: "New Product 2",
           description: "This is a new product",
-          price: 99.99,
+          price: 4.99,
         }
       },
     });

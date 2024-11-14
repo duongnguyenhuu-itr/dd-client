@@ -3,6 +3,12 @@
 import { AvatarCustom } from '@/components/custom/avatarCustom';
 import { Button } from '@/components/ui/button';
 import { gql, useQuery } from '@apollo/client';
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs';
 
 const GET_PRODUCTS = gql`
   query {
@@ -29,6 +35,14 @@ export default function Home() {
   return (
     <div>
       <h1>Products 2</h1>
+      <div>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
       <div>
         <Button>Click me</Button>
         <AvatarCustom
