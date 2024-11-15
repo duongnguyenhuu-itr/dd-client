@@ -34,10 +34,6 @@ export const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
         </div>
         <div className="flex items-center gap-4">
-          <div>Home</div>
-          <div>Shopping</div>
-          <div>Blog</div>
-          <div>More</div>
           <Navigation />
         </div>
         <div className="flex items-center gap-4">
