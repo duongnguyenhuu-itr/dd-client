@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,8 +14,16 @@ import { Label } from "@/components/ui/label";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { SearchForm } from "./searchForm";
 import classNames from "classnames";
+import { Navigation } from "./navigation";
 
 export const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const menu = [
+    {
+      name: "Home",
+      link: "/",
+      // content: 
+    }
+  ]
   return (
     <div
       className={classNames("flex justify-center border-b", props.className)}
@@ -22,6 +31,16 @@ export const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <div className="flex justify-between w-[1200px]">
         <div className="flex items-center gap-4">
           <div>logo</div>
+
+        </div>
+        <div className="flex items-center gap-4">
+          <div>Home</div>
+          <div>Shopping</div>
+          <div>Blog</div>
+          <div>More</div>
+          <Navigation />
+        </div>
+        <div className="flex items-center gap-4">
           <Dialog>
             <DialogTrigger asChild>
               <SearchForm />
@@ -61,18 +80,15 @@ export const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-        </div>
-        <div className="flex items-center gap-4">
-          <div>categories</div>
           <div>cart</div>
-          {/* <div>
+          <div>
             <SignedOut>
               <SignInButton />
             </SignedOut>
             <SignedIn>
               <UserButton />
             </SignedIn>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
