@@ -40,7 +40,7 @@ export default function RootLayout({
           <ApolloWrapper>
             <div className="min-h-screen flex flex-col">
               <Header className="sticky top-0 w-full bg-white z-50" />
-              <div className="flex-1 w-[1200px] h-[2000px] mx-auto">
+              <div className="flex-1 w-full h-full mx-auto">
                 {children}
               </div>
               <Footer />

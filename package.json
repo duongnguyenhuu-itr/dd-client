@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -22,14 +24,18 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tabler/icons-react": "^3.24.0",
+    "apollo-server-express": "^3.13.0",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
+    "express": "^4.21.1",
     "fbemitter": "^3.0.0",
     "framer-motion": "^11.13.1",
     "graphql": "^16.9.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.456.0",
+    "mongoose": "^8.8.3",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18",
@@ -41,6 +47,11 @@
     "vaul": "^1.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.3",
+    "@graphql-codegen/client-preset": "^4.5.1",
+    "@graphql-codegen/typescript": "4.1.2",
+    "@graphql-codegen/typescript-operations": "^4.4.0",
+    "@graphql-codegen/typescript-resolvers": "4.4.1",
     "@types/fbemitter": "^2.0.35",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",

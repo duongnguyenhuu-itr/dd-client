@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* <h1>Products 2</h1>
+      <h1>Products 2</h1>
 
       <div>
         <Button>Click me</Button>
@@ -36,7 +36,7 @@ export default function Home() {
             {product.name} - ${product.price}
           </li>
         ))}
-      </ul> */}
+      </ul>
       <div className='max-h-64'>
         <MainBackground
           title={<>Sanjana Airlines, <br /> Sajana Textiles.</>}
