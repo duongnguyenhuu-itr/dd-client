@@ -1,18 +1,11 @@
 "use client";
 
+import GET_PRODUCTS from '@/apollo/query/getProducts';
 import { AvatarCustom } from '@/components/custom/avatarCustom';
+import { MainBackground } from '@/components/custom/mainBackground';
+import { MobileNavigation } from '@/components/custom/mobileNavigation';
 import { Button } from '@/components/ui/button';
-import { gql, useQuery } from '@apollo/client';
-
-const GET_PRODUCTS = gql`
-  query {
-    products {
-      id
-      name
-      price
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
 
 interface Product {
   id: string;
@@ -23,12 +16,12 @@ interface Product {
 export default function Home() {
   const { loading, error, data } = useQuery<{ products: Product[] }>(GET_PRODUCTS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
-      <h1>Products 2</h1>
+      {/* <h1>Products 2</h1>
 
       <div>
         <Button>Click me</Button>
@@ -43,7 +36,13 @@ export default function Home() {
             {product.name} - ${product.price}
           </li>
         ))}
-      </ul>
+      </ul> */}
+      <div className='max-h-64'>
+        <MainBackground
+          title={<>Sanjana Airlines, <br /> Sajana Textiles.</>}
+          subTitle='Get the best advices from our experts, including expert artists,painters, marathon enthusiasts and RDX, totally free.'
+        />
+      </div>
     </div>
   );
 }

@@ -1,26 +1,66 @@
-import { Search } from "lucide-react"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   SidebarGroup,
-  SidebarGroupContent,
-  SidebarInput,
-} from "@/components/ui/sidebar"
-import { Button } from "../ui/button"
+  SidebarGroupContent
+} from "@/components/ui/sidebar";
+import { Search } from "lucide-react";
 export function SearchForm({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-      <SidebarGroup className="py-0">
-        <SidebarGroupContent className="relative">
-          {/* <Label htmlFor="search" className="sr-only">
-            Search
-          </Label>
-          <SidebarInput
-            id="search"
-            placeholder="Search the docs..."
-            className="pl-8 focus-visible:ring-0 focus:border-input cursor-pointer"
-          /> */}
-          <Button variant={'outline'} className="pl-8 bg-accent text-gray-500 hover:text-gray-800">Search the docs...</Button> 
-          <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
-        </SidebarGroupContent>
-      </SidebarGroup>
+    <Dialog>
+      <DialogTrigger asChild>
+        <SidebarGroup className="py-0 w-fit">
+          <SidebarGroupContent className="relative w-fit">
+            <Button variant={'outline'} className="pl-8 bg-accent text-gray-500 hover:text-gray-800">Search the docs...</Button>
+            <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you're
+            done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input
+              id="name"
+              defaultValue="Pedro Duarte"
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input
+              id="username"
+              defaultValue="@peduarte"
+              className="col-span-3"
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
   )
 }
