@@ -1,9 +1,6 @@
 "use client";
 
 import GET_PRODUCTS from "@/apollo/query/getProducts";
-import { AvatarCustom } from "@/components/custom/avatarCustom";
-import { MainBackground } from "@/components/custom/mainBackground";
-import { MobileNavigation } from "@/components/custom/mobileNavigation";
 import CategoryItem, { TCategoryItem } from "@/components/home/categoryItem";
 import CountDown from "@/components/home/countDown";
 import FlashSaleItem, { TFlashSaleItem } from "@/components/home/flashSaleItem";
@@ -11,15 +8,12 @@ import MostPopularItem, {
   TMostPopularItem,
 } from "@/components/home/mostPopularItem";
 import NewItem, { TNewItem } from "@/components/home/newItem";
-import { Button } from "@/components/ui/button";
-import { HomeBannerType, MostPopularType } from "@/contants/home";
+import { MostPopularType } from "@/contants/home";
 import { useQuery } from "@apollo/client";
 import dayjs from "dayjs";
 import { CircleChevronRight } from "lucide-react";
 
 import Image from "next/image";
-import Link from "next/link";
-import { title } from "process";
 
 interface Product {
   id: string;
@@ -197,7 +191,7 @@ export default function Home() {
             <FlashSaleItem
               key={item.id}
               data={item}
-              // className="w-36 md:w-52 lg:w-64"
+            // className="w-36 md:w-52 lg:w-64"
             />
           ))}
         </div>

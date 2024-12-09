@@ -14,15 +14,21 @@ import {
   SidebarGroup,
   SidebarGroupContent
 } from "@/components/ui/sidebar";
+import classNames from "classnames";
 import { Search } from "lucide-react";
 export function SearchForm({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <SidebarGroup className="py-0 w-fit">
-          <SidebarGroupContent className="relative w-fit">
-            <Button variant={'outline'} className="pl-8 bg-accent text-gray-500 hover:text-gray-800">Search the docs...</Button>
-            <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+        <SidebarGroup className="py-0 w-full p-0">
+          <SidebarGroupContent className={classNames("relative w-full", props.className)}>
+            <div className="hidden md:block w-full max-w-[400px]">
+              <Button variant={'outline'} className="pl-8 bg-accent text-gray-500 hover:text-gray-800 w-full justify-start">Search the docs...</Button>
+              <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+            </div>
+            <div className="md:hidden">
+              <Search className="cursor-pointer" />
+            </div>
           </SidebarGroupContent>
         </SidebarGroup>
       </DialogTrigger>

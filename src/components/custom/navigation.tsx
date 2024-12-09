@@ -52,9 +52,9 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export function Navigation() {
+export function Navigation({ className }: { className?: string }) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className={className}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>

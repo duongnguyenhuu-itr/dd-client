@@ -1,11 +1,11 @@
+import { Footer } from "@/components/custom/footer";
+import { Header } from "@/components/custom/header";
 import { ApolloWrapper } from "@/lib/apolloWrapper";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
+import { Raleway } from "next/font/google";
 import React from "react";
 import "./globals.css";
-import { Header } from "@/components/custom/header";
-import { Footer } from "@/components/custom/footer";
-import { Raleway } from "next/font/google";
 
 const raleway = Raleway({
   weight: ["600", "700"],
@@ -32,10 +32,12 @@ export default function RootLayout({
       <html lang="en">
         <body className={raleway.className}>
           <ApolloWrapper>
-            <div className="min-h-screen flex flex-col">
+            <div className="h-screen flex flex-col">
               <Header className="sticky top-0 w-full bg-white z-50" />
-              <div className="flex-1 w-full h-full mx-auto">{children}</div>
-              <Footer />
+              <div className="flex-1 w-full mx-auto overflow-auto">
+                {children}
+                <Footer />
+              </div>
             </div>
           </ApolloWrapper>
         </body>
