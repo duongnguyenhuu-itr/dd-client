@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export type TNewItemCard = {
+export type TNewItem = {
   id: string;
   name: string;
   price: number;
@@ -10,20 +10,20 @@ export type TNewItemCard = {
 
 interface IProps {
   className?: string;
-  data: TNewItemCard;
+  data: TNewItem;
 }
 
-const NewItemCard = (props: IProps) => {
+const NewItem = (props: IProps) => {
   const { name, price, image } = props.data;
   return (
     <div className={props.className}>
-      <div className="rounded-lg p-1.5 shadow-[0_5px_10px_0_rgba(0,0,0,0.1)]">
+      <div className="rounded-xl p-1.5 shadow-[0_5px_10px_0_rgba(0,0,0,0.1)]">
         <Image
           src={image}
           alt=""
           width={200}
           height={200}
-          className="w-full h-full rounded"
+          className="w-full h-full rounded-lg"
         />
       </div>
       <div className="mt-1 text-[12px] md:text-sm lg:text-base">{name}</div>
@@ -34,4 +34,4 @@ const NewItemCard = (props: IProps) => {
   );
 };
 
-export default NewItemCard;
+export default NewItem;

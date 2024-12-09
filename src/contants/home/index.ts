@@ -4,3 +4,9 @@ export enum HomeBannerType {
   COMBO = "COMBO",
   CUSTOM = "CUSTOM",
 }
+
+export enum MostPopularType {
+  NEW = "NEW",
+  SALE = "SALE",
+  HOT = "HOT",
+}

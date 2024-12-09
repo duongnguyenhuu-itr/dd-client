@@ -4,10 +4,15 @@ import GET_PRODUCTS from "@/apollo/query/getProducts";
 import { AvatarCustom } from "@/components/custom/avatarCustom";
 import { MainBackground } from "@/components/custom/mainBackground";
 import { MobileNavigation } from "@/components/custom/mobileNavigation";
+import CategoryItem, { TCategoryItem } from "@/components/home/categoryItem";
 import CountDown from "@/components/home/countDown";
-import NewItemCard, { TNewItemCard } from "@/components/home/newItemCard";
+import FlashSaleItem, { TFlashSaleItem } from "@/components/home/flashSaleItem";
+import MostPopularItem, {
+  TMostPopularItem,
+} from "@/components/home/mostPopularItem";
+import NewItem, { TNewItem } from "@/components/home/newItem";
 import { Button } from "@/components/ui/button";
-import { HomeBannerType } from "@/contants/home";
+import { HomeBannerType, MostPopularType } from "@/contants/home";
 import { useQuery } from "@apollo/client";
 import dayjs from "dayjs";
 import { CircleChevronRight } from "lucide-react";
@@ -27,9 +32,9 @@ export default function Home() {
     products: Product[];
   }>(GET_PRODUCTS);
 
-  const categories = [
+  const categories: TCategoryItem[] = [
     {
-      id: 1,
+      id: "1",
       name: "Switches",
       href: "#",
       count: 122,
@@ -41,7 +46,7 @@ export default function Home() {
       ],
     },
     {
-      id: 2,
+      id: "2",
       name: "Keycaps",
       href: "#",
       count: 100,
@@ -53,7 +58,7 @@ export default function Home() {
       ],
     },
     {
-      id: 3,
+      id: "3",
       name: "Keyboards",
       href: "#",
       count: 100,
@@ -65,7 +70,7 @@ export default function Home() {
       ],
     },
     {
-      id: 4,
+      id: "4",
       name: "Accessories",
       href: "#",
       count: 100,
@@ -79,27 +84,45 @@ export default function Home() {
   ];
   const banners = [
     {
-      id: 1,
+      id: "1",
       image: "https://github.com/shadcn.png",
       link: "/product/1",
     },
     {
-      id: 2,
+      id: "2",
       image: "https://github.com/shadcn.png",
       link: "product/2",
     },
     {
-      id: 3,
+      id: "3",
       image: "https://github.com/shadcn.png",
       link: "product/3",
     },
   ];
-  const newItems: TNewItemCard[] = [
+  const newItems: TNewItem[] = [
     {
       id: "1",
       name: "Lorem ipsum dolor sit amet consectetur.",
       price: 10.23,
       image: "https://github.com/shadcn.png",
+    },
+  ];
+  const flashSaleItems: TFlashSaleItem[] = [
+    {
+      id: "1",
+      name: "Lorem ipsum dolor sit amet consectetur.",
+      discount: 0.2,
+      image: "https://github.com/shadcn.png",
+    },
+  ];
+  const mostPopularItems: TMostPopularItem[] = [
+    {
+      id: "1",
+      name: "Lorem ipsum dolor sit amet consectetur.",
+      likes: 100,
+      type: MostPopularType.HOT,
+      image: "https://github.com/shadcn.png",
+      href: "/product/1",
     },
   ];
 
@@ -117,33 +140,9 @@ export default function Home() {
             <CircleChevronRight size={24} />
           </div>
         </div>
-        <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 rounde">
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
           {categories.map((category) => (
-            <div
-              key={category.id}
-              className="bg-white shadow-md p-1.5 rounded-lg"
-            >
-              <div className="grid grid-cols-2 gap-1">
-                {category.images.map((image, index) => (
-                  <div className="rounded-lg overflow-hidden">
-                    <Image
-                      key={index}
-                      src={image}
-                      alt={category.name}
-                      width={200}
-                      height={200}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-between items-center mt-1.5">
-                <div className="text-md font-bold">{category.name}</div>
-                <div className="text-sm font-bold bg-[#DFE9FF] px-2 rounded-lg">
-                  {category.count}
-                </div>
-              </div>
-            </div>
+            <CategoryItem key={category.id} data={category} />
           ))}
         </div>
       </section>
@@ -177,7 +176,7 @@ export default function Home() {
         {/* Carousel of new items */}
         <div className="flex gap-4">
           {newItems.map((item) => (
-            <NewItemCard
+            <NewItem
               key={item.id}
               data={item}
               className="w-36 md:w-52 lg:w-64"
@@ -193,12 +192,31 @@ export default function Home() {
           </div>
         </div>
         {/* Carousel of new items */}
-        <div className="flex gap-4">
-          {newItems.map((item) => (
-            <NewItemCard
+        <div className="grid gap-4 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5">
+          {flashSaleItems.map((item) => (
+            <FlashSaleItem
               key={item.id}
               data={item}
-              className="w-36 md:w-52 lg:w-64"
+              // className="w-36 md:w-52 lg:w-64"
+            />
+          ))}
+        </div>
+      </section>
+      <section className="mt-8">
+        <div className="flex justify-between items-center mb-2">
+          <div className="text-xl font-bold">Most Popular</div>
+          <div className="flex gap-2 cursor-pointer items-center">
+            <div className="text-sm font-bold leading-6">See All</div>
+            <CircleChevronRight size={24} />
+          </div>
+        </div>
+        {/* Carousel of new items */}
+        <div className="flex gap-4">
+          {mostPopularItems.map((item) => (
+            <MostPopularItem
+              key={item.id}
+              data={item}
+              className="w-28 md:w-32 lg:w-36"
             />
           ))}
         </div>
