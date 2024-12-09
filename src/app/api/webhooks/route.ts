@@ -1,11 +1,6 @@
-import CREATE_USER from "@/apollo/mutation/createUser";
-import { createOrUpdateUser } from "@/lib/actions/user";
-import { connectToDB } from "@/lib/mongodb/mongoose";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
-import axios from "axios";
-import { query } from "express";
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
@@ -57,75 +52,52 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  try {
-    if (eventType === "user.created" || eventType === "user.updated") {
-      const { id, email_addresses, first_name, last_name, image_url } =
-        evt.data;
+  if (eventType === "user.created" || eventType === "user.updated") {
+    const { id, email_addresses, first_name, last_name, image_url } =
+      evt.data;
 
-      if (!id || !email_addresses) {
-        return new Response("Error: Missing user data", {
-          status: 400,
-        });
-      }
-
-      const user = {
-        clerkId: id,
-        email: email_addresses[0].email_address,
-        firstName: first_name,
-        lastName: last_name,
-        imageUrl: image_url,
-      };
-
-      console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
-
-      // fetch(process.env.DATABASE_URL || '', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-
-      //   },
-      //   body: JSON.stringify({
-      //     query: CREATE_USER,
-      //     variables: {
-      //       input: user
-      //     }
-      //   })
-      // }).then((res) => {
-      //   console.log('Create user response:', res);
-      //   if (res.ok) {
-      //     console.log('Create user success');
-      //   } else {
-      //     console.log('Create user error');
-      //   }
-      // }).catch((error) => {
-      //   console.log('Create user error:', error);
-      // });
-
-      const result = await axios.post(
-        process.env.DATABASE_URL || "",
-        {
-          query: CREATE_USER,
-          variables: {
-            input: user,
-          },
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // await createOrUpdateUser({
-      //   id,
-      //   first_name,
-      //   last_name,
-      //   image_url,
-      //   email_addresses,
-      // });
+    if (!id || !email_addresses) {
+      return new Response("Error: Missing user data", {
+        status: 400,
+      });
     }
-  } catch (error: any) {
-    console.log("Create user error:",error, error?.message, error?.response?.data);
+
+    const user = {
+      clerkId: id,
+      email: email_addresses[0].email_address,
+      firstName: first_name,
+      lastName: last_name,
+      imageUrl: image_url,
+    };
+
+    const query = `
+      mutation createUser($input: CreateUserInput!) {
+        createUser(input: $input) {
+          clerkId
+          email 
+          firstName
+          lastName
+          imageUrl
+        }
+      }
+    `;
+
+    fetch(process.env.DATABASE_URL || '', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables: {
+          input: user
+        }
+      })
+    }).then((res) => {
+      console.log('Create user response:', res);
+    }).catch((error) => {
+      console.log('Create user error:', error);
+    });
   }
 
   return new Response("Webhook received", { status: 200 });

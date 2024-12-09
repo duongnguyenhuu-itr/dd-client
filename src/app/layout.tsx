@@ -6,6 +6,8 @@ import React from "react";
 import "./globals.css";
 import { Header } from "@/components/custom/header";
 import { Footer } from "@/components/custom/footer";
+import { BackgroundLines } from "@/components/ui/background-lines";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,12 +40,12 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         >
           <ApolloWrapper>
-            <div className="min-h-screen flex flex-col">
+            <div className="h-screen flex flex-col">
               <Header className="sticky top-0 w-full bg-white z-50" />
-              <div className="flex-1 w-full h-full mx-auto">
+              <div className="flex-1 w-full mx-auto overflow-auto">
                 {children}
+                <Footer />
               </div>
-              <Footer />
             </div>
           </ApolloWrapper>
         </body>
